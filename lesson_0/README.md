@@ -85,19 +85,21 @@ dunno = false
 
 ### Unknown
 
-`unknown` is the type-safe alternative to `any`. There are often times where we want to describe the least-capable type in TypeScript. This is useful for APIs that want to signal “this can be any value, so you must perform some type of checking before you use it”. This forces users to safely introspect returned values.
+`unknown` is the type-safe alternative to `any`. It's useful for us to signal “this can be any value (which is potentially very dangerous, so you must perform some type of checking before you use it”. This forces other users to safely use returned values
 
-Anything is assignable to unknown, but unknown isn't assignable to anything but itself and any without a type assertion or a control flow based narrowing.
+Anything is assignable to unknown, but unknown isn't assignable to anything but itself and any without a type assertion or proper type checking:
 
 ```ts
-let vAny: any = 10;          // We can assign anthing to any
-let vUnknown: unknown =  10; // We can assign anthing to unknown just like any 
+// We assign a value here, one with `any`, one with `unknown`:
+let myThing1: any = 10;          // We can assign anthing to any
+let myThing2: unknown =  10; // We can assign anthing to unknown just like any 
 
-let s1: string = vAny;     // Any is assigable to anything 
-let s2: string = vUnknown; // Invalid we can't assign vUnknown to any other type (without an explicit assertion)
+// We try to use assign our variables to something we've explicity said is a string:
+let s1: string = myThing1;     // OK! Any is assigable to anything 
+let s2: string = myThing2; // NOT OK! We can't assign myThing2 to any other type (without an explicit assertion)
 
-vAny.method();     // ok anything goes with any
-vUnknown.method(); // not ok, we don't know anything about this variable
+// So we need to EXPLICITLY use a type assertion (as ___) in order to use `myThing2`
+let s2: string = myThing2 as string
 ```
 
 ### Null, Undefined
