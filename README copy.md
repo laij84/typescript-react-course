@@ -1,20 +1,20 @@
-# Introduction to TypeScript in React
+# Let's Build a Shopping Basket inn React with TypeScript!
 
 ## About the course
 
-The aim of this course is to help developers coming from ReactJS learn basic TypeScript, specifically how to use it when building a React application. We will be focusing on modern React syntax using Function Components and Hooks.
+The aim of this course is to help developers coming from React JS and class components to start thinking in TypeScript and React Hooks.
 
-Learn by doing - this course will use the core principles of persistent storage - `Create`, `Read`, `Update`, and `Delete` (CRUD) - to build a Todo App in React with TypeScript.
+This course will use the core principles of persistent storage - `Create`, `Read`, `Update`, and `Delete` (CRUD) - to build a shopping basket in React, where you can add items (create), view your basket (read), edit quantities (update) and remove items from the basket (delete).
 
 ## Outcomes
 
 By the end of the course you should be familiar with:
 
-- Typescript basics (string, number, boolean, Array, tuple, enum, object, any, null, undefined and never)
-- Some advanced types (unions, interfaces, generics)
-- Using TypeScript instead of PropTypes when typing your React component props.
-- Debugging TypeScript and inspecting existing type definitions from third party libraries like React.
-- Using Typescript with Function Components and Hooks
+-   Using TypeScript instead of PropTypes when typing your React components
+-   Debugging TypeScript and inspecting existing type definitions from libraries like React.
+-   Using React Functional Components with React Hooks to manage state and simple "lifecycle" operations (e.g when mounting, when updating).
+-   Redux-pattern state management with the useReducer hook.
+-   A basic understanding of GraphQL and Apollo JS.
 
 ## Getting started
 
