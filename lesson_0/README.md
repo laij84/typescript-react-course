@@ -94,11 +94,11 @@ Anything is assignable to unknown, but unknown isn't assignable to anything but 
 let myThing1: any = 10;          // We can assign anthing to any
 let myThing2: unknown =  10; // We can assign anthing to unknown just like any 
 
-// We try to use assign our variables to something we've explicity said is a string:
+// We try to assign our variables to something we've explicity said is a string:
 let s1: string = myThing1;     // OK! Any is assigable to anything 
 let s2: string = myThing2; // NOT OK! We can't assign myThing2 to any other type (without an explicit assertion)
 
-// So we need to EXPLICITLY use a type assertion (as ___) in order to use `myThing2`
+// So we need to EXPLICITLY use a type assertion (as ___) in order to use `myThing2, so as to tell the type system we know better:`
 let s2: string = myThing2 as string
 ```
 
