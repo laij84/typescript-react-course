@@ -6,7 +6,7 @@ This lesson is a crash course to cover the fundamentals of TypeScript. This won'
 
 TypeScript is a superset of JavaScript - meaning it contains all the features of JS and has been expanded or enhanced to include other features as well. TypeScript adds static typing to JavaScript, meaning that the types of all variables are known or inferred at compile time.
 
-## Why should be bother using it?
+## Why should I bother using it?
 
 TypeScript adds a lot of benefits to your app such as:
 
@@ -75,12 +75,29 @@ const kitten: Cat = Cat[0] // Evalutes to 'Calico'
 
 ### Any
 
-Sometimes we may not know the type, for example if the variable is dynamic or coming from a third party library. In this case, we can use `any` - which is basically an opt-out type - meaning its no safer in terms of type checking than regular JavaScript.
+Sometimes we may not know the type, for example if the variable is dynamic or we are scaffolding part of our app and we aren't sure of a specific type yet. In this case, we can use `any` - which is basically an opt-out type - meaning its no safer in terms of type checking than regular JavaScript. 
 
 ```ts
 let dunno: any = 3
 dunno = 'foo bar'
 dunno = false
+```
+
+### Unknown
+
+`unknown` is the type-safe alternative to `any`. There are often times where we want to describe the least-capable type in TypeScript. This is useful for APIs that want to signal “this can be any value, so you must perform some type of checking before you use it”. This forces users to safely introspect returned values.
+
+Anything is assignable to unknown, but unknown isn't assignable to anything but itself and any without a type assertion or a control flow based narrowing.
+
+```ts
+let vAny: any = 10;          // We can assign anthing to any
+let vUnknown: unknown =  10; // We can assign anthing to unknown just like any 
+
+let s1: string = vAny;     // Any is assigable to anything 
+let s2: string = vUnknown; // Invalid we can't assign vUnknown to any other type (without an explicit assertion)
+
+vAny.method();     // ok anything goes with any
+vUnknown.method(); // not ok, we don't know anything about this variable
 ```
 
 ### Null, Undefined
@@ -236,6 +253,7 @@ state.name = 'Kitty' // Error: Cannot assign to 'name' because it is a read-only
 
 const updatedState = { ...state, name: 'Kitty' } // Valid
 ```
+You will often see interfaces used in React to define the props a component is expecting.
 
 ### Intersection Types
 
