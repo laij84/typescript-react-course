@@ -70,7 +70,7 @@ const kitten: Cat = 'Bengal' // Error: Type '"Bengal"' is not assignable to type
 Enums also use numeric indexes (similar to arrays)
 
 ```ts
-const kitten: Cat = Cat[2] // Evalutes to 'Ginger'
+const kitten: Cat = Cat[0] // Evalutes to 'Calico'
 ```
 
 ### Any
@@ -112,7 +112,7 @@ fizz = undefined // Error: Type 'undefined' is not assignable to type 'number'.
 
 Type `void` is the absence of any type at all. You may commonly see this as the return type of functions that do not return a value:
 
-A function that doesn't explicitly return a value implicitly returns the value undefined in JavaScript. Although it "doesn't return anything", it still returns. We usually ignore the return value in these cases. Such a function is inferred to have a void return type in TypeScript.
+A function that doesn't explicitly return a value implicitly returns the value undefined in JavaScript. Although it "doesn't return anything", it still returns. We usually ignore the return value in these cases. Such a function is inferred to have a `void` return type in TypeScript.
 
 ```ts
 function warnUser(): void {
@@ -160,21 +160,6 @@ A variable with a union type can have more than one type. Each possible type is 
 
 ```ts
 const value = string | number | boolean
-```
-
-### Intersection Types
-
-Intersection types combine multiple types with `&` and the resulting type is where they overlap.
-
-```ts
-type Foo = string | number
-type Bar = string | boolean
-
-// Foo & Bar evaluates to type `string` as this is the common denominator between Foo and Bar.
-const foobar: Foo & Bar = 'hello world'
-
-// Error: Type 'false' is not assignable to type 'string'.
-const fizzbuzz: Foo & Bar = false
 ```
 
 ### Literal Types
@@ -250,6 +235,69 @@ const state: State = {
 state.name = 'Kitty' // Error: Cannot assign to 'name' because it is a read-only property.
 
 const updatedState = { ...state, name: 'Kitty' } // Valid
+```
+
+### Intersection Types
+
+Intersection types combine multiple types with `&` and the resulting type has the properties of all the types. This is commonly used with interfaces.
+
+```ts
+interface Person {
+  name: string
+  job: string
+  age: number
+}
+
+interface Mammal {
+  species: string
+}
+
+const bob: Mammal & Person = {
+  name: 'Bob',
+  job: 'Developer',
+  age: 30,
+  species: 'Homo Sapien',
+}
+```
+
+You may notice this seems exactly the same as extending an interface (e.g. `interface Person extends Mammal`). However, the key difference is how they handle duplicate properties.
+
+```ts
+interface Mammal {
+  species: string
+  name: number | string
+}
+
+interface Person {
+  name: string | boolean
+  job: string
+  age: number
+}
+
+const bob: Mammal & Person = {
+  // name: 3, Error: Type 'number' is not assignable to type 'string'
+  name: "Bob" // Valid - property `name` has type string on both Person and Mammal.
+  job: 'Developer',
+  age: 30,
+  species: 'Homo Sapien',
+}
+```
+
+In the above example, `name` has a different type definition on `Mammal` and `Person`. However, `string` is accepted as the valid type, as it is present on both.
+
+When extending an interface, different type definitions for the same property will error, regardless of if there is a common type between them.
+
+```ts
+interface Mammal {
+  species: string
+  name: number | string
+}
+
+interface Person extends Mammal {
+  name: string | boolean //Error: Interface 'Person' incorrectly extends interface 'Mammal'. Types of property 'name' are incompatible.
+  job: string
+  age: number
+}
 ```
 
 ### Utility Types
@@ -418,7 +466,7 @@ function output<T>(arg: T): T {
 }
 ```
 
-Here we are using a type variable `T`. What the above code is saying is, function output accepts type `T` shown in the angle brackets, and its argument will be of the same type `T`, and the function will return `T`.
+Here we are using a type variable `T`. What the above code is saying is, function `output` accepts type `T` shown in the angle brackets, and its argument will be of the same type `T`, and the function will return `T`.
 
 `T` is a _type variable_ - meaning it can be called anything. We could call it `Scooba` and it wouldn't matter. Typically the standard convention is to use capital single letters to denote type variables, like `T` for `type` or `P` for `props`.
 
