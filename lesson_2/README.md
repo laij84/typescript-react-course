@@ -1,15 +1,15 @@
-# Lesson 1 - Starting our Todo App in TypeScript
+# Lesson 2 - Creating Todos Part 2
 
-## 1. Planning
+## 1. Displaying todos
 
-What do we need to make a Todo App? Start thinking about what properties a todo needs.
+- In order to display the todos, we need to store the values returned from the form somewhere, and then render them on the page.
+- In `./pages/home/Home.tsx`, use the `useState` hook to store each submitted todo in state.
+- We need a way to determine if a todo is completed or not. By default, a todo should be incomplete. Refactor your state to incorporate this.
+- Apply type guards to your useState function. Write a `Todo` interface.
+- Map over these and display them in a list. Just display the todo text for now. In the next part we will flesh this out more.
 
-## 2. Create a type definition for your Todo
+## 1. Make a `TodoItem` component
 
-- Now that we roughly know what the todo should look like, lets write a type definition `TodoProps` to use. (Tip: consider using a TypeScript `interface`).
-- For now, lets do this inside `./lesson_1/pages/home/Home.tsx` above the `Home` component.
-
-## 3. Make a Todo the user can create.
-
-- Lets make a way for users to create todos. There should be an input field for them to enter task for their todo list. We'll need to use [controlled inputs](https://reactjs.org/docs/forms.html#controlled-components) in React to do this. We want our React component state to be our "single source of truth", giving us greater control and (likely) fewer bugs.
-- The `<Product/>` component needs its own state to manage the controlled input where the user enters the value of the voucher. (Tip: Use the useState hook to do this).
+- Create the folder `mkdir ./components/todoItem` and create a file `TodoItem.tsx`. Scaffold out a React Arrow Function Component which returns an `<li>`.
+- Think about what props this component should take. Write an interface for it.
+- For now, lets focus on just displaying the information. In the next lesson we will handle updating the todos to mark them as completed.

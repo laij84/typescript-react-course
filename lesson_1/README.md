@@ -21,9 +21,10 @@ Lets start with the first point - A way for users to create todos. It sounds lik
 - Look at the type definition for the `useState` hook. How can we apply type guarding to the state of our component?
 - Write a `handleChange` function to set the component state.
 - Write a `handleSubmit` function that gets called when the form is submitted. Don't forget to `preventDefault` to stop the page from reloading.
+- How can we add type guards to these functions to ensure they always accept the correct inputs and return the correct output?
 - Use the React Dev tools to check your controlled input is working.
 
 ## 3. Typing our Component
 
 - Think about how this `Form` component is going to be used. We need a way to access the value of this text input outside the component. What props should it take?
-- Hint: consider using a TypeScript `interface`.
+- Hint: Remember, `props` is an object literal. Consider using a TypeScript `interface`.
