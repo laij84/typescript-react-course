@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "react",
     "keyofStringsOnly": true,
     "lib": ["dom", "esnext", "dom.iterable"],

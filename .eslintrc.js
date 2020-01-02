@@ -31,6 +31,7 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'import/no-unresolved': 'error',
     'import/prefer-default-export': 'off',
+    'import/no-default-export': 'error',
     indent: 'off', // in conflict with prettier
     'jsx-a11y/anchor-is-valid': 'off',
     'jsx-a11y/no-redundant-roles': 'off',

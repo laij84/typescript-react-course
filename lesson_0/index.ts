@@ -1,7 +1,2 @@
-type stringOrNumber = string | number
-
-type booleanOrNull = boolean | null
-
-const blah: stringOrNumber & booleanOrNull = 'hello'
-
-console.log(blah)
+// To prevent errors due to "isolatedModules" flag in tsconfig,
+export const dummy = {}
