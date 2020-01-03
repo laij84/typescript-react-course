@@ -1,4 +1,4 @@
-# Lesson 2 - Creating Todos Part 2
+# Lesson 2 - Finish creating and displaying todos
 
 ## 1. Displaying todos
 
