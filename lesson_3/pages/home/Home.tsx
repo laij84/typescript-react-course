@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Form } from '../../components/form/Form'
 import { TodoItem } from '../../components/todoItem/TodoItem'
 
@@ -11,10 +11,12 @@ export interface Todo {
 export const Home = () => {
   const [state, setState] = useState<Todo[]>([])
 
-  const handleSubmit = (value: string): void => {
-    console.log(value)
-    setState([...state, { text: value, completed: false, id: Date.now() }])
-  }
+  const handleSubmit = useCallback(
+    (value: string): void => {
+      setState([...state, { text: value, completed: false, id: Date.now() }])
+    },
+    [state]
+  )
 
   return (
     <div>

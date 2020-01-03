@@ -12,4 +12,6 @@
 
 - Create the folder `mkdir ./components/todoItem` and create a file `TodoItem.tsx`. Scaffold out a React Arrow Function Component which returns an `<li>`.
 - Think about what props this component should take. Write an interface for it.
-- For now, lets focus on just displaying the information. In the next lesson we will handle updating the todos to mark them as completed.
+- For now, lets focus on just displaying the information - Your `li` should contain a `<input type="checkbox">` and the todo text.
+- Import your `TodoItem` component into `Home.tsx` and use it to display the todos.
+- In the next lesson we will handle updating the todos to mark them as completed.

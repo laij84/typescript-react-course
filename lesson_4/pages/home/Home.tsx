@@ -42,7 +42,7 @@ export const Home = () => {
     []
   )
 
-  const handleSubmit = (value: string): void => {
+  const handleSubmit = useCallback((value: string): void => {
     dispatch({
       type: 'CREATE',
       value: {
@@ -51,7 +51,7 @@ export const Home = () => {
         id: Date.now(),
       },
     })
-  }
+  }, [])
 
   return (
     <div>

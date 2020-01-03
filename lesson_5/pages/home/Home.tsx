@@ -9,7 +9,7 @@ export interface Todo {
 }
 
 interface Action {
-  type: 'CREATE' | 'UPDATE'
+  type: 'CREATE' | 'UPDATE' | 'DELETE'
   value: Todo
 }
 
@@ -24,6 +24,10 @@ const reducer = (state: Todo[], action: Action) => {
         }
         return todo
       })
+    case 'DELETE':
+      return state.filter(todo => {
+        return todo.id !== action.value.id
+      })
     default:
       return state
   }
@@ -37,6 +41,15 @@ export const Home = () => {
     todo =>
       dispatch({
         type: 'UPDATE',
+        value: todo,
+      }),
+    []
+  )
+
+  const handleDelete = useCallback(
+    todo =>
+      dispatch({
+        type: 'DELETE',
         value: todo,
       }),
     []
@@ -58,7 +71,7 @@ export const Home = () => {
       <Form onSubmit={handleSubmit} />
       <ul>
         {state.map(todo => (
-          <TodoItem key={todo.id} todo={todo} onUpdate={handleUpdate} />
+          <TodoItem key={todo.id} todo={todo} onUpdate={handleUpdate} onDelete={handleDelete} />
         ))}
       </ul>
     </div>

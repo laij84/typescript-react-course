@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 
 interface FormProps {
   /**
@@ -11,27 +11,23 @@ interface FormProps {
   onSubmit: (value: string) => void
 }
 
-export const Form: React.FC<FormProps> = ({ onSubmit, value }) => {
+export const Form: React.FC<FormProps> = React.memo(({ onSubmit, value }) => {
   const [state, setState] = useState<string>(value || '')
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
-    setState(e.target.value)
-  }, [])
-
-  const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>): void => {
-      e.preventDefault()
+  // Example of typing a function that takes an Event as argument that is not inline
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    if (state) {
       onSubmit(state) // Pass state up to parent component
       setState('') // Reset form
-    },
-    [onSubmit, state]
-  )
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="create_todo">Enter todo:</label>
       <br />
-      <input id="create_todo" type="text" value={state} onChange={handleChange} />
+      <input id="create_todo" type="text" value={state} onChange={(e): void => setState(e.target.value)} />
     </form>
   )
-}
+})

@@ -8,7 +8,7 @@ interface TodoItemProps {
   todo: Todo
 }
 
-export const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+export const TodoItem: React.FC<TodoItemProps> = React.memo(({ todo }) => {
   return (
     <li>
       <input
@@ -19,4 +19,4 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       {todo.text}
     </li>
   )
-}
+})
