@@ -3,9 +3,9 @@ import { Form } from '../../components/form/Form'
 import { TodoItem } from '../../components/todoItem/TodoItem'
 
 export interface Todo {
-  id: number
-  completed: boolean
-  text: string
+  readonly id: number
+  readonly completed: boolean
+  readonly text: string
 }
 
 interface Action {

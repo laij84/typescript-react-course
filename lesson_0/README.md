@@ -52,7 +52,7 @@ In this example `person` is an array with 2 items, the first is always a string,
 
 ### Enums
 
-Enums can be used to define a fixed set of types that can be selected from. You can use the dot notation like with objects to specify which type you want.
+Enums can be used to define a set of constants. This is similar to union types (which will be discussed later), but there are some key differences.
 
 ```ts
 enum Cat {
@@ -62,25 +62,53 @@ enum Cat {
   Tuxedo,
 }
 
-const cat: Cat = Cat.Calico
+// You can use the dot notation like with objects to specify which type you want.
+const cat: Cat = Cat.Calico // Valid
 
 const kitten: Cat = 'Bengal' // Error: Type '"Bengal"' is not assignable to type 'Cat'.
 ```
 
-Enums also use numeric indexes (similar to arrays)
+Unlike other types in TypeScript which only exist at compile time, enum values can be used at runtime. Enums are numeric by default - meaning at runtime they evaluate to a numeric value (their index value).
 
 ```ts
-const kitten: Cat = Cat[0] // Evalutes to 'Calico'
+enum Cat {
+  Calico,
+  Ginger,
+  Tabby,
+  Tuxedo,
+}
+console.log(Cat.Calico) // outputs 0
+console.log(Cat.Ginger) // outputs 1
+console.log(Cat.Tabby) // outputs 2
+console.log(Cat.Tuxedo) // outputs 3
 ```
+
+You can also assign string values to enums, like this:
+
+```ts
+enum Cat {
+  Calico = 'CALICO',
+  Ginger = 'GINGER',
+  Tabby = 'TABBY',
+  Tuxedo = 'TUXEDO',
+}
+
+console.log(Cat.Calico) // outputs "CALICO"
+console.log(Cat.Ginger) // outputs "GINGER"
+console.log(Cat.Tabby) // outputs "TABBY"
+console.log(Cat.Tuxedo) // outputs "TUXEDO"
+```
+
+Even though enums are classified as a "basic type" they can be quite complicated. Most of the time you will be using a union types (discussed later) for a predefined set of things, so don't worry too much about understanding enums if you don't get it right now.
 
 ### Any
 
-Sometimes we may not know the type, for example if the variable is dynamic or we are scaffolding part of our app and we aren't sure of a specific type yet. In this case, we can use `any` - which is basically an opt-out type - meaning its no safer in terms of type checking than regular JavaScript.
+Sometimes we may not know the type, for example if the variable is dynamic or we are scaffolding part of our app and we aren't sure of a specific type yet. In this case, we can use `any` - which is basically an _opt-out_ type - meaning its no safer in terms of type checking than regular JavaScript.
 
 ```ts
 let dunno: any = 3
-dunno = 'foo bar'
-dunno = false
+dunno = 'foo bar' // Valid
+dunno = false // Valid
 ```
 
 ### Unknown
@@ -131,7 +159,7 @@ fizz = undefined // Error: Type 'undefined' is not assignable to type 'number'.
 
 Type `void` is the absence of any type at all. You may commonly see this as the return type of functions that do not return a value:
 
-A function that doesn't explicitly return a value implicitly returns the value `undefined` in JavaScript. Although it "doesn't return anything", it still returns. We usually ignore the return value in these cases. Such a function is inferred to have a `void` return type in TypeScript.
+A function that doesn't explicitly return a value implicitly returns the value `undefined` in JavaScript. Although it doesn't return anything, it still returns. We usually ignore the return value in these cases. Such a function is inferred to have a `void` return type in TypeScript.
 
 ```ts
 function warnUser(): void {
@@ -192,20 +220,20 @@ const value4: Value = ['hello', 'world'] // Error: Type 'string[]' is not assign
 Literal types specify the exact value of the type.
 
 ```ts
-// String Literal Type - Although it is a string, it is not of string type. Must exactly match 'Kitty' or will error.
+// String Literal Type - Although it is a string, it is more specific. It must exactly match 'Kitty' or will error.
 type Name = 'Kitty'
 
 const firstName: Name = 'Kitty' // Valid
 const anotherName: Name = 'Bob' // Error: Type '"Bob"' is not assignable to type '"Kitty"'.
 
-// Number Literal Type - Although it is a number, it is not of a number type. Must exactly match 3 or will error.
+// Number Literal Type - Although it is a number, it is more specific. It must exactly match 3 or will error.
 type Num = 3
 
 const num: Num = 3 // Valid
 const anotherNum: Num = 52 // Error: Type '52' is not assignable to type '3'.
 ```
 
-Literal types can also be used with union types.
+Literal types can also be used with union types to define an exact list of types.
 
 ```ts
 type TextAlign = 'left' | 'right' | 'center'
@@ -216,9 +244,28 @@ const rightAlign: TextAlign = 'right' // Valid
 const verticalAlign: TextAlign = 'top' // Error: Type '"top"' is not assignable to type 'TextAlign'
 ```
 
+You can also use the `type` keyword to describe the shape of an object. For example:
+
+```ts
+type Person = {
+  name: string
+  age: number
+}
+
+const bob: Person = {
+  name: 'Bob',
+  age: 53,
+}
+```
+
+In the next section we will be talking about interfaces, which also describe the shape of an object. There are differences between using a `type` vs `interface`, but in general in your React application, either would work. Just use them consistently.
+
+If you want to learn more about the difference between `type` and `interface`, [this blogpost](https://pawelgrzybek.com/typescript-interface-vs-type/) explains it pretty well.
+
 ### Interfaces
 
 Interfaces describe the shape of an object. A similar comparison in React would be `PropTypes.shape({})`.
+Unlike the keyword `type` declaration, `interface` can **only** be used to describe the shape of an object.
 
 ```ts
 interface Person {
@@ -304,45 +351,7 @@ const bob: Mammal & Person = {
 }
 ```
 
-You may notice this seems exactly the same as extending an interface (e.g. `interface Person extends Mammal`). However, the key difference is how they handle duplicate properties.
-
-```ts
-interface Mammal {
-  species: string
-  name: number | string
-}
-
-interface Person {
-  name: string | boolean
-  job: string
-  age: number
-}
-
-const bob: Mammal & Person = {
-  // name: 3, Error: Type 'number' is not assignable to type 'string'
-  name: "Bob" // Valid - property `name` has type string on both Person and Mammal.
-  job: 'Developer',
-  age: 30,
-  species: 'Homo Sapien',
-}
-```
-
-In the above example, `name` has a different type definition on `Mammal` and `Person`. However, `string` is accepted as the valid type, as it is present on both.
-
-When extending an interface, different type definitions for the same property will error, regardless of if there is a common type between them.
-
-```ts
-interface Mammal {
-  species: string
-  name: number | string
-}
-
-interface Person extends Mammal {
-  name: string | boolean //Error: Interface 'Person' incorrectly extends interface 'Mammal'. Types of property 'name' are incompatible.
-  job: string
-  age: number
-}
-```
+You may notice this seems similar to extending an interface (e.g. `interface Person extends Mammal`). However, there are some differences. This is a bit advanced and outside of the scope of the intro lesson, but you can read more about it on this [Stack Overflow thread](https://stackoverflow.com/questions/52681316/difference-between-extending-and-intersecting-interfaces-in-typescript) which explains it pretty well.
 
 ### Utility Types
 
@@ -563,6 +572,10 @@ This concludes the beginner TypeScript lesson. In the next lesson, we will apply
 [https://github.com/typescript-cheatsheets/react-typescript-cheatsheet](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet)
 
 [https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md)
+
+[Extending vs Intersecting Interfaces](https://stackoverflow.com/questions/52681316/difference-between-extending-and-intersecting-interfaces-in-typescript)
+
+[Type vs Interface](https://pawelgrzybek.com/typescript-interface-vs-type/)
 
 [Ben Awad - TypeScript Generics Tutorial](https://www.youtube.com/watch?v=nViEqpgwxHE&t=982s)
 

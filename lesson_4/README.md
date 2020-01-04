@@ -3,7 +3,7 @@
 ## 1. Make todo text editable
 
 - We not only want to be able to mark todos as complete, but edit the actual text as well.
-- The `CREATE` action we created in the previous lesson should already handle this for us. All we need to do is make the todo editable.
+- The `UPDATE` action we created in the previous lesson should already handle this for us. All we need to do is make the todo editable.
 - Hint: We can re-use the `Form` component we created previously.
 - You'll need to `useState` to manage the edit mode of the `TodoItem` component. Add this and apply type guards like we have done previously with `useState`.
 
