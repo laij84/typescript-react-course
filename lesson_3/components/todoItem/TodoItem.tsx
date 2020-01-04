@@ -5,7 +5,7 @@ interface TodoItemProps {
   /**
    * The todo to display
    */
-  todo: Todo
+  readonly todo: Todo
 }
 
 export const TodoItem: React.FC<TodoItemProps> = React.memo(({ todo }) => {

@@ -6,7 +6,7 @@ interface TodoItemProps {
   /**
    * The todo to display
    */
-  todo: Todo
+  readonly todo: Todo
   /**
    * Function that exposes the current todo for you to handle update
    */
