@@ -143,8 +143,8 @@ By default null and undefined are assignable to all types in TypeScript.
 
 ```ts
 let fizz: number = 123
-fizz = null // Okay
-fizz = undefined // Okay
+fizz = null // Valid
+fizz = undefined // Valid
 ```
 
 In strict mode (which is encouraged), you cannot assign null or undefined to another type.
@@ -435,7 +435,7 @@ function add(x: number, y: number): number {
 }
 ```
 
-It takes arguments which are defined in the function parenthesis as numbers `(x: number, y: number)`. Outside of the parenthesis there is a colon with a `number` after it, before the opening curly bracket. This is the type of what the function returns (number).
+It takes arguments which are defined in the function parenthesis as numbers `(x: number, y: number)`. Outside of the parenthesis there is a colon with `number` after it, before the opening curly bracket. This is the type of what the function returns (number).
 
 Anonymous functions assigned to variables can be typed similar to how we type other variables, by putting a colon and the type definition after the variable name.
 
@@ -467,7 +467,7 @@ const add: Add = (x, y) => {
 }
 ```
 
-Why would we bother using an interface to type a function? In some cases functions have properties too. A key example are Function Components in React. They are functions, but also have properties like `Component.defaultProps` or `Component.displayName`. In fact, this is exactly how the React type definitions packages define their function component.
+Why would we bother using an interface to type a function? In some cases functions have properties too. A key example are Function Components in React. They are functions, but also have properties like `Component.defaultProps` or `Component.displayName`. In fact, this is exactly how the React type definitions package defines Function Components.
 
 ```ts
 interface FunctionComponent<P = {}> {
@@ -479,7 +479,7 @@ interface FunctionComponent<P = {}> {
 }
 ```
 
-Don't worry if you don't fully understand the example above, as its using other types specific to the React type definitions and Generics (which we will cover next).
+Don't worry if you don't fully understand the example above, as its using other types specific to the React and Generics (which we will cover next).
 
 But at a glance from this type definition, we can see that Function Components have properties `propTypes`, `contextTypes`, `defaultProps` and `displayName`, and also have a call signature which takes some `props` and `context` as arguments, and returns some React Elements (JSX), or `null`.
 
@@ -519,7 +519,7 @@ function output<T>(arg: T): T {
 }
 ```
 
-Here we are using a type variable `T`. What the above code is saying is, function `output` accepts type `T` shown in the angle brackets, and its argument will be of the same type `T`, and the function will return `T`.
+Here we are using a **type variable** `T`. What the above code is saying is, function `output` accepts type `T` shown in the angle brackets, and its argument will be of the same type `T`, and the function will return `T`.
 
 `T` is a _type variable_ - meaning it can be called anything. We could call it `Scooba` and it wouldn't matter. Typically the standard convention is to use capital single letters to denote type variables, like `T` for `type` or `P` for `props`.
 
