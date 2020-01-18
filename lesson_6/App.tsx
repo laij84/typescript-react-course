@@ -1,8 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { GlobalStyle } from './App.styles'
+import { GlobalStyle } from './theme/global.styles'
 import { Home } from './pages/home/Home'
+import { theme } from './theme/theme'
 
 const StyledHeader = styled.header`
   padding: 0 20px;
@@ -25,14 +26,16 @@ const Wrapper = styled.div`
 
 export const App: React.FC = () => {
   return (
-    <>
-      <GlobalStyle />
-      <Header />
-      <Wrapper>
-        <Router>
-          <Route exact path="/" component={Home} />
-        </Router>
-      </Wrapper>
-    </>
+    <ThemeProvider theme={theme}>
+      <>
+        <GlobalStyle />
+        <Header />
+        <Wrapper>
+          <Router>
+            <Route exact path="/" component={Home} />
+          </Router>
+        </Wrapper>
+      </>
+    </ThemeProvider>
   )
 }
