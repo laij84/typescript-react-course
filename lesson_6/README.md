@@ -6,7 +6,7 @@ Most of you probably have some experience with styled components. In case you ha
 // First import it
 import styled from 'styled-components'
 
-// Create a component with it, and use tagged template literal syntax to pass it CSS propertiesconsole.log();
+// Create a component with it, and use tagged template literal syntax to pass it CSS properties;
 const Button = styled.button`
   background-color: green;
   color: white;
@@ -190,7 +190,7 @@ interface ButtonProps extends MarginProps {
 }
 
 const Button = styled.button<ButtonProps>(
-  ({ theme, variant }) => css`
+  ({ theme }) => css`
     border-radius: 5px;
     ${variant({
       prop: 'variant',

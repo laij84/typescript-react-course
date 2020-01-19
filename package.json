@@ -10,7 +10,7 @@
     "react-scripts": "3.3.0",
     "short-id": "^0.1.0-1",
     "styled-components": "^4.4.0",
-    "styled-system": "^5.1.2",
+    "styled-system": "^5.1.4",
     "typescript": "3.6.3"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "@types/react-router": "^5.1.1",
     "@types/react-router-dom": "^5.1.0",
     "@types/styled-components": "^4.1.19",
-    "@types/styled-system": "^5.1.2",
+    "@types/styled-system": "^5.1.4",
     "@types/styled-system__css": "^5.0.4",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
     "babel-eslint": "^10.0.3",
