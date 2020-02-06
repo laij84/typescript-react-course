@@ -1,7 +1,6 @@
-// let config = require('./jest.config.js')
 module.exports = {
   rootDir: '.',
-  roots: ['<rootDir>/lesson_6', '<rootDir>/node_modules'],
+  roots: ['<rootDir>/lesson_7', '<rootDir>/node_modules'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testMatch: ['./**/?(*.)+(spec|test).[jt]s?(x)'],
   coverageDirectory: '<rootDir>/lesson_6/coverage',

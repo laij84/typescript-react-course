@@ -21,5 +21,6 @@
     "strictNullChecks": true,
     "target": "es5"
   },
-  "include": ["./**/*.tsx", "./**/*.ts", "react-app-env.d.ts"]
+  "include": ["./**/*.tsx", "./**/*.ts", "react-app-env.d.ts"],
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"]
 }
