@@ -4,8 +4,8 @@ import { withA11y } from '@storybook/addon-a11y'
 import { withInfo } from '@storybook/addon-info'
 import { action } from '@storybook/addon-actions'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { GlobalStyle } from '../lesson_6/theme/global.styles'
-import { theme } from '../lesson_6/theme/theme'
+import { GlobalStyle } from '../src/theme/global.styles'
+import { theme } from '../src/theme/theme'
 
 const StorybookGlobalStyle = createGlobalStyle`
   body {
@@ -30,7 +30,7 @@ window.___navigate = pathname => {
   action('NavigateTo:')(pathname)
 }
 
-const req = require.context('../lesson_6', true, /.stories.tsx$/)
+const req = require.context('../src/lesson_7', true, /.stories.tsx$/)
 
 function loadStories() {
   req.keys().forEach(req)

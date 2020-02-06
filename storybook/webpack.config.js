@@ -1,5 +1,5 @@
 const path = require('path')
-const SRC_PATH = path.join(__dirname, '../lesson_7')
+const SRC_PATH = path.join(__dirname, '../src/lesson_7')
 
 module.exports = ({ config }) => {
   config.module.rules.push({
