@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 
 let App = null
 
-console.log(JSON.stringify(process.env.REACT_APP_LESSON), typeof process.env.REACT_APP_LESSON)
 switch (process.env.REACT_APP_LESSON) {
   case '1':
     App = require('./lesson_1/App').App

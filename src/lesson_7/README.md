@@ -57,9 +57,9 @@ This addon runs accessibility checks against the component in your story. This h
 
 ### Exercises
 
-Write stories for some of the components in your Todo App. You should:
+Write stories for some of the componesnts in your Todo App. In your components folder, you should see 3 components: `TodoItem`, `Form` and `Filters`. You should:
 
-- Write multiple stories for each component.
+- Write a story for each component.
 - Use at least 3 different kinds of knobs (e.g. text, select, boolean, options etc).
 - Use addon-actions to log DOM events (e.g. clicking a button).
 - Use addon-info to write some explanatory text about your components.

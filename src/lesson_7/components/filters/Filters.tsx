@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Legend, Fieldset, Optionset, Radio } from './Filters.styles'
-import { FiltersProps } from './Filters.types'
+import { FiltersProps, Filter } from './Filters.types'
 
-export const Filters: React.FC<FiltersProps> = ({ setFilter, filter }) => {
+export const Filters: React.FC<FiltersProps> = ({ onChange, initialValue }) => {
+  const [filter, setFilter] = useState<Filter>(initialValue || 'all')
   return (
     <Fieldset>
       <Legend>Filter by:</Legend>
@@ -12,8 +13,12 @@ export const Filters: React.FC<FiltersProps> = ({ setFilter, filter }) => {
             type="radio" //
             name="filters"
             id="all"
+            value="all"
             checked={filter === 'all'}
-            onChange={() => setFilter('all')}
+            onChange={e => {
+              setFilter('all')
+              onChange(e)
+            }}
           />
           <label htmlFor="all">All</label>
         </li>
@@ -22,8 +27,12 @@ export const Filters: React.FC<FiltersProps> = ({ setFilter, filter }) => {
             type="radio"
             name="filters"
             id="completed"
+            value="completed"
             checked={filter === 'completed'}
-            onChange={() => setFilter('completed')}
+            onChange={e => {
+              setFilter('completed')
+              onChange(e)
+            }}
           />
           <label htmlFor="completed">Completed</label>
         </li>
@@ -32,8 +41,12 @@ export const Filters: React.FC<FiltersProps> = ({ setFilter, filter }) => {
             type="radio"
             name="filters"
             id="incomplete"
+            value="incomplete"
             checked={filter === 'incomplete'}
-            onChange={() => setFilter('incomplete')}
+            onChange={e => {
+              setFilter('incomplete')
+              onChange(e)
+            }}
           />
           <label htmlFor="incomplete">Incomplete</label>
         </li>
