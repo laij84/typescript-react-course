@@ -3,13 +3,12 @@ import styled, { css } from 'styled-components'
 export const Field = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 0.5em;
 `
 export const Label = styled.label(
   ({ theme }) => css`
     color: ${theme.colors.indigo};
     font-family: ${theme.fonts.title};
-    margin-right: 1em;
+    margin-right: 0.5em;
   `
 )
 
@@ -25,11 +24,12 @@ export const Input = styled.input(
 )
 
 export const StyledForm = styled.form`
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 `
 
 export const Error = styled.small(
   ({ theme }) => css`
     color: ${theme.colors.tomato};
+    margin-top: 0.5em;
   `
 )

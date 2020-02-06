@@ -11,6 +11,7 @@ export const Fieldset = styled.fieldset(
   ({ theme }) => css`
     border: 2px solid ${theme.colors.eucalyptusGreen};
     border-radius: 5px;
+    margin-bottom: 1em;
   `
 )
 
@@ -30,18 +31,21 @@ export const Radio = styled.input.attrs(() => ({ type: 'radio' }))(
     appearance: none;
     border: 2px solid ${theme.colors.skyBlue};
     border-radius: 50%;
-    height: 2em;
-    width: 2em;
+    height: 1.5em;
+    width: 1.5em;
     position: relative;
     display: inline-block;
+    font-size: 1rem;
+    margin-right: 0.5em;
 
     &:checked {
       &:before {
         content: '';
+        font-size: 1rem;
         position: absolute;
         display: block;
-        height: 1em;
-        width: 1em;
+        height: 0.75em;
+        width: 0.75em;
         background-color: ${theme.colors.skyBlue};
         border-radius: 50%;
         top: 50%;

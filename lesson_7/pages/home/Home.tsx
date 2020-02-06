@@ -83,7 +83,7 @@ export const Home = () => {
     <div>
       <Form onSubmit={handleSubmit} />
       <Filters setFilter={setFilter} filter={filter} />
-      <List marginTop="2em" padding="0">
+      <List padding="0">
         {state.filter(filterTodos).map(todo => (
           <TodoItem key={todo.id} todo={todo} onUpdate={handleUpdate} onDelete={handleDelete} />
         ))}
