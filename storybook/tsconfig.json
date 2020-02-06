@@ -25,6 +25,6 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["./src/lesson_7"],
+  "include": ["../src/lesson_7"],
   "exclude": ["build", "scripts", "node_modules"]
 }
