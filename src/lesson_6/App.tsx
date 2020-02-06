@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { GlobalStyle } from './theme/global.styles'
+import { GlobalStyle } from '../theme/global.styles'
+import { theme } from '../theme/theme'
 import { Home } from './pages/home/Home'
-import { theme } from './theme/theme'
 
 const StyledHeader = styled.header`
   padding: 0 20px;
