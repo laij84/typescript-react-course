@@ -4,6 +4,7 @@ import { TodoItem } from '../../components/todoItem/TodoItem'
 import { Filters } from '../../components/filters/Filters'
 import { Filter } from '../../components/filters/Filters.types'
 import { List } from '../../components/todoItem/TodoItem.styles'
+import { Status } from './Home.styles'
 
 export interface Todo {
   readonly id: number
@@ -41,28 +42,31 @@ export const Home = () => {
   const initialState: Todo[] = (cache && JSON.parse(cache)) || []
   const [state, dispatch] = useReducer(reducer, initialState)
   const [filter, setFilter] = useState<Filter>('all')
+  const [statusMessage, setStatus] = useState<string>('')
 
   useEffect(() => {
     window.localStorage.setItem('todos', JSON.stringify(state))
   }, [state])
 
-  const handleUpdate = useCallback(
-    todo =>
-      dispatch({
-        type: 'UPDATE',
-        value: todo,
-      }),
-    []
-  )
+  useEffect(() => {
+    setStatus(`Displaying ${filter} todos`)
+  }, [filter])
 
-  const handleDelete = useCallback(
-    todo =>
-      dispatch({
-        type: 'DELETE',
-        value: todo,
-      }),
-    []
-  )
+  const handleUpdate = useCallback(todo => {
+    dispatch({
+      type: 'UPDATE',
+      value: todo,
+    })
+    setStatus(`Todo "${todo.text}" updated`)
+  }, [])
+
+  const handleDelete = useCallback(todo => {
+    dispatch({
+      type: 'DELETE',
+      value: todo,
+    })
+    setStatus(`Todo "${todo.text}" deleted`)
+  }, [])
 
   const handleSubmit = (value: string): void => {
     dispatch({
@@ -73,6 +77,7 @@ export const Home = () => {
         id: Date.now(),
       },
     })
+    setStatus(`Todo "${value}" added`)
   }
 
   const filterTodos = (todo: Todo) => {
@@ -83,6 +88,7 @@ export const Home = () => {
     <div>
       <Form onSubmit={handleSubmit} />
       <Filters onChange={e => setFilter(e.target.value as Filter)} initialValue={filter} />
+      <Status>{statusMessage}</Status>
       <List padding="0">
         {state.filter(filterTodos).map(todo => (
           <TodoItem key={todo.id} todo={todo} onUpdate={handleUpdate} onDelete={handleDelete} />
