@@ -3,6 +3,7 @@ import { configure, addDecorator, addParameters } from '@storybook/react'
 import { withA11y } from '@storybook/addon-a11y'
 import { withInfo } from '@storybook/addon-info'
 import { action } from '@storybook/addon-actions'
+import { withKnobs } from '@storybook/addon-knobs'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { GlobalStyle } from '../src/theme/global.styles'
 import { theme } from '../src/theme/theme'
@@ -38,6 +39,7 @@ function loadStories() {
 
 addDecorator(withA11y)
 addDecorator(withInfo)
+addDecorator(withKnobs)
 addParameters({
   info: {
     inline: true,
